@@ -21,12 +21,10 @@ class Graph {
     this.edges[vertex2].push(vertex1);
     ++this.totalEdges;
   }
-  removeEdge() {
-
-  }
+  removeEdge() {}
   traverseDFS(vertex, fn) {
     if (!~this.vertices.indexOf(vertex)) {
-      return console.log('Vertex not found');
+      return console.log("Vertex not found");
     }
     const visited = [];
     this._traverseDFS(vertex, visited, fn);
@@ -39,24 +37,23 @@ class Graph {
     }
     for (let i = 0; i < this.edges[vertex].length; i++) {
       if (!visited[this.edges[vertex][i]]) {
-        this._traverseDFS(this.edges[vertex][i], visited, fn)
+        this._traverseDFS(this.edges[vertex][i], visited, fn);
       }
     }
-
   }
   traverseBFS(vertex, fn) {
     if (!~this.vertices.indexOf(vertex)) {
-      return console.log('Vertex not found');
+      return console.log("Vertex not found");
     }
 
-    let queue = []
+    let queue = [];
     queue.push(vertex);
     let visited = [];
     visited[vertex] = true;
 
     while (queue.length) {
-      vertex = queue.shift()
-      fn(vertex)
+      vertex = queue.shift();
+      fn(vertex);
       for (let i = 0; i < this.edges[vertex].length; i++) {
         if (!visited[this.edges[vertex][i]]) {
           visited[this.edges[vertex][i]] = true;
@@ -66,9 +63,13 @@ class Graph {
     }
   }
   print() {
-    console.log(this.vertices.map(function(vertex) {
-      return (vertex + ' -> ' + this.edges[vertex].join(', ')).trim();
-    }, this).join(' | '))
+    console.log(
+      this.vertices
+        .map(function(vertex) {
+          return (vertex + " -> " + this.edges[vertex].join(", ")).trim();
+        }, this)
+        .join(" | ")
+    );
   }
 }
 const graph = new Graph();
@@ -87,6 +88,10 @@ graph.addEdge(3, 4);
 graph.addEdge(4, 5);
 graph.addEdge(4, 6);
 graph.print();
-graph.traverseBFS(3, (vertex) => { console.log(vertex); });
-console.log('______________________________________')
-graph.traverseDFS(3, (vertex) =>{ console.log(vertex); });
+graph.traverseBFS(3, vertex => {
+  console.log(vertex);
+});
+console.log("______________________________________");
+graph.traverseDFS(3, vertex => {
+  console.log(vertex);
+});
